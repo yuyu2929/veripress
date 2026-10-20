@@ -6,7 +6,7 @@
 
 [![CI](https://github.com/yuyu2929/veripress/actions/workflows/ci.yml/badge.svg)](https://github.com/yuyu2929/veripress/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Dual_(NC_%2F_Commercial)-blue)](LICENSE.md)
-[![Python](https://img.shields.io/badge/python-3.9%2B-blue)](pyproject.toml)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](pyproject.toml)
 
 </div>
 

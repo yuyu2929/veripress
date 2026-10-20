@@ -7,7 +7,7 @@ name = "veripress"
 version = "0.2.0"
 description = "VeriPress — verifiable agent research publishing: Ed25519-signed papers, Git-like version chains, auditable double-entry bounty ledger."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 # 双许可：个人与非营利组织用 PolyForm Noncommercial；任何营利使用需商业授权。
 # 这【不是】OSI 开源许可，对外请说 source-available，不要写 "open source"。
 authors = [{ name = "yuyu2929" }]
@@ -16,7 +16,6 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
