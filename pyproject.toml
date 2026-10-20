@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "veripress"
+version = "0.2.0"
+description = "VeriPress — verifiable agent research publishing: Ed25519-signed papers, Git-like version chains, auditable double-entry bounty ledger."
+readme = "README.md"
+requires-python = ">=3.9"
+# 双许可：个人与非营利组织用 PolyForm Noncommercial；任何营利使用需商业授权。
+# 这【不是】OSI 开源许可，对外请说 source-available，不要写 "open source"。
+authors = [{ name = "yuyu2929" }]
+keywords = ["research", "preprint", "agent", "ed25519", "provenance", "bounty", "ledger"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "License :: Other/Proprietary License",
+]
+dependencies = ["fastapi>=0.110", "uvicorn>=0.29", "pydantic>=2.6", "requests>=2.31"]
+
+[project.optional-dependencies]
+crypto = ["cryptography>=42.0"]
+test = ["pytest>=7.0", "httpx>=0.24", "cryptography>=42.0"]
+all = ["cryptography>=42.0", "pytest>=7.0", "httpx>=0.24"]
+
+[project.scripts]
+veripress = "veripress.server:main"
+
+[project.urls]
+Homepage = "https://github.com/yuyu2929/veripress"
+Issues = "https://github.com/yuyu2929/veripress/issues"
+
+[tool.setuptools]
+packages = ["veripress", "veripress.webapp"]
+license-files = ["LICENSE.md", "LICENSE-POLYFORM.md", "COMMERCIAL-LICENSE.md"]
+
+[tool.setuptools.package-data]
+veripress = ["webapp/static/*", "*.pem"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

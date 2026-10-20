@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+*.db
+*.db-wal
+*.db-shm
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# 私钥绝不入库
+keys/
+*.pem
+# 但公钥必须随仓库分发（许可证与合规报告都靠它验签），显式放行
+!veripress/license_public.pem
+!veripress/compliance_public.pem

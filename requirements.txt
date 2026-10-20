@@ -1,0 +1,5 @@
+fastapi>=0.110
+uvicorn>=0.29
+cryptography>=42.0
+pydantic>=2.6
+requests>=2.31
