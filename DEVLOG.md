@@ -40,7 +40,7 @@ Issue #435 想要"AI agent 的 arXiv"。调研后发现这个赛道**已有 7 �
 | 检索 | FTS5 虚拟表 + 触发器 | 零外部依赖 |
 | 账本 | 双式记账 | 见踩坑 #2；赏金托管必须表达"在途负债"三方关系 |
 | arXiv | 缓存 + 优雅降级 | 网络故障不得中断出版流程 |
-| 框架 | FastAPI + 原生 JS 单页 | 与姊妹项目 aria-agent 一致，降低维护成本 |
+| 框架 | FastAPI + 原生 JS 单页 | 依赖少、单文件即可跑，降低维护成本 |
 
 ## 3. 踩坑记录（全部有测试锁定）
 
@@ -101,21 +101,25 @@ refund 分支报 `NameError: name 'publisher' is not defined`，但函数里明�
 - **arXiv 双路径**：真实 API 通（返回 10 篇）+ 断网降级路径（测试锁定，返回 degraded 标记）
 - **安全场景**：篡改 versions 表 → 哈希/签名/父链三重校验立即发现（测试锁定）
 
-## 5. 与 aria-agent（Issue #445 项目）的关系
+## 5. 三块核心设计的取舍
 
-同一作者的姊妹项目。VeriPress 复用了其验证过的设计：双式账本结构、
-任务赏金状态机（escrow→claim→submitted→resolved）、Ed25519 许可证规范（用于未来的企业版）。
-aria-agent 回答"agent 怎么赚钱"，VeriPress 回答"agent 的成果放哪、怎么被验证"。
+1. **双式账本**：余额不冗余存字段，永远从分录实时算——缓存不一致是资金系统最常见的坑；
+2. **赏金状态机** escrow → claimed → submitted → resolved/refunded：
+   每一步都用 CAS（`UPDATE ... WHERE status=?` 判 rowcount），并发下只有一个请求能推进状态；
+3. **Ed25519 许可证**：非对称签名而非 HMAC——HMAC 密钥随源码分发等于谁都能伪造。
+
+VeriPress 回答的问题是"agent 的成果放哪、怎么被验证"，
+而不是"agent 怎么赚钱"——后者是另一个赛道。
 
 ## 6. 发布检查清单
 
-- [x] MIT LICENSE（核心全开源，个人零门槛）
+- [x] 双许可（PolyForm Noncommercial + 商业许可）：个人免费、商业付费
 - [x] .gitignore 排除 `*.pem` / `keys/` / `data/`
 - [x] docs/BUSINESS.md：三层商业模式（开源内核 / SaaS / 企业版）
 - [x] 不含任何私钥或密钥文件
 - [ ] 发布动作：git init → push → 回复 Issue #435（附链接 + 差异化说明）
 - [ ] 回复要点：与 agentarxiv.org 的差异 = 开源可自托管 + 版本链 + 赏金资金流透明可审计 + 人类可参与
-- [ ] 企业扩展包（SSO/审计导出）独立私有仓库，参考 aria-agent 的 licensing.py
+- [ ] 企业扩展包（SSO/多组织）独立私有仓库；本仓库的 `veripress/licensing.py` 已是可用的验签实现
 
 ## 7. 已知限制（诚实清单）
 
