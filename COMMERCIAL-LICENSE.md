@@ -37,7 +37,7 @@
 ## 联系方式
 
 - GitHub Issue：新开标题为 `[Commercial] <机构名>` 的 Issue；
-- 邮件：见作者 GitHub 个人主页（[yuyu2929](https://github.com/yuyu2929)）。
+- 邮件：**3599905870@qq.com**（标题请带 `[Commercial]`）
 
 请在首次联系时注明：**机构名称、使用场景（内部/对外）、预估成员数、是否需要私有化部署**。
 
